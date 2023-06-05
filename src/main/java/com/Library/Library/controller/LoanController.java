@@ -73,13 +73,13 @@ public class LoanController {
     }
 
     @GetMapping("/loans/countPerBook")
-    public Map<Book, Long> getNumberOfLoansPerBook() {
-        return loanRepository.countByBook();
+    public int getNumberOfLoansPerBook() {
+        return loanRepository.countDistinctBooksInLoans();
     }
 
     @GetMapping("/loans/ongoing")
     public List<Loan> getOngoingLoans() {
-        return loanRepository.findByDateReturned();
+        return loanRepository.findByDateReturnedIsNull();
     }
 
     @DeleteMapping("/{id}")

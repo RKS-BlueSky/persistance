@@ -39,9 +39,9 @@ public class CategoryController {
 
     @DeleteMapping("/{id}")
     public void deleteCategory(@PathVariable Long id) {
-        List<Book> books = bookRepository.findByCategory_Id(id);
         Category category = categoryRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Category not found"));
+        List<Book> books = bookRepository.findByCategoriesId(id);
 
         for (Book book : books) {
             List<Category> categories = book.getCategories();
